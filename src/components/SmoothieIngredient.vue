@@ -1,5 +1,8 @@
 <template>
-  <div class="smoothie-ingredient">{{name}}</div>
+  <div class="smoothie-ingredient">
+    <span>{{quantity}}</span>
+    <span>{{ingredient}}</span>
+  </div>
 </template>
 
 <script>
@@ -7,6 +10,6 @@ import { db } from "@/db";
 
 export default {
   name: "SmoothieIngredient",
-  props: ["name"]
+  props: ["quantity", "ingredient"]
 };
 </script>
