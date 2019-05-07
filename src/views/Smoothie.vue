@@ -48,7 +48,6 @@ export default {
         .then(snapshot => {
           this.smoothie = snapshot.data();
         });
-      s;
     },
     addIngredient(event) {
       event.preventDefault();
