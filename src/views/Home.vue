@@ -29,10 +29,18 @@ export default {
     };
   },
   methods: {
-    onAddSmoothieSubmit() {
-      db.collection("smoothies").add({
-        name: this.newSmoothieName
-      });
+    onAddSmoothieSubmit(event) {
+      event.preventDefault();
+      db.collection("smoothies")
+        .add({
+          name: this.newSmoothieName
+        })
+        .then(response => {
+          this.$router.push({
+            name: "smoothie",
+            params: { smoothieID: response.id }
+          });
+        });
     }
   },
 
