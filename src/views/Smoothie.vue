@@ -1,32 +1,26 @@
 <template>
-  <div class="home">
+  <div class="smoothie">
     <header>
-      <h1>Smoothio</h1>
+      <h1>Smoothie name {{$route.params}}</h1>
     </header>
-    <div class="list-of-smoothies"></div>
   </div>
 </template>
 
 <script>
-import { db } from "@/db";
+// import { db } from "@/db";
 
-const smoothie = db.collection("smoothies");
+// const smoothie = db.collection("smoothies");
+console.log("loading smoothie");
 
 export default {
-  name: "smootihe",
+  name: "smoothie",
   data() {
     return {
       smoothie: []
     };
   },
-  watch: {
-    id: {
-      // call it upon creation too
-      immediate: true,
-      handler(id) {
-        this.$bind("smoothie", users.doc(id));
-      }
-    }
+  created() {
+    console.log("create!");
   }
 };
 </script>
