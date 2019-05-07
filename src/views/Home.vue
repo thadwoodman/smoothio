@@ -51,7 +51,7 @@ export default {
           .then(response => {
             // navigate to newly created smoothie name
             this.$router.push({
-              name: "smoothie",
+              name: "Smoothie",
               params: { smoothieID: response.id }
             });
           });

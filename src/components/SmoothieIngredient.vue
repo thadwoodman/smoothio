@@ -1,8 +1,8 @@
 <template>
-  <div class="smoothie-ingredient">
-    <span>{{quantity}}</span>
+  <li class="smoothie-ingredient">
+    <span>{{quantity}}</span> of
     <span>{{ingredient}}</span>
-  </div>
+  </li>
 </template>
 
 <script>

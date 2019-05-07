@@ -13,16 +13,19 @@
         <input type="text" v-model="addTagInput">
       </form>
     </div>
-    <div class="smoothie-ingredients">
+    <div class="ingredients-container">
+      <h2>Ingredients:</h2>
+    </div>
+    <ul class="smoothie-ingredients">
       <SmoothieIngredient
         v-for="ingredient in smoothie.ingredients"
         v-bind:key="ingredient.id"
         v-bind:quantity="ingredient.quantity"
         v-bind:ingredient="ingredient.ingredient"
       />
-    </div>
+    </ul>
     <div class="add-smoothie-ingredients">
-      <button v-on:click="showIngredientsForm = true">Add ingredients</button>
+      <button v-on:click="showIngredientsForm = true">Add ingredient</button>
       <form v-if="showIngredientsForm" v-on:submit="addIngredient">
         <div class="input-container">
           <label for="quantity">Quantity</label>
@@ -60,7 +63,7 @@ export default {
     return {
       smoothieID: "",
       smoothie: {},
-      showIngredientsForm: true,
+      showIngredientsForm: false,
       newIngredientInputQuantity: "",
       newIngredientInputIngredient: "",
       showError: false,
@@ -108,7 +111,7 @@ export default {
         this.displayErrorText("Please enter a tag");
       } else if (
         this.smoothie.tags &&
-        this.smoothie.tags.include(this.addTagInput)
+        this.smoothie.tags.includes(this.addTagInput)
       ) {
         this.displayErrorText("Tag already exists");
       } else {
@@ -117,6 +120,7 @@ export default {
         }
         this.smoothie.tags.push(this.addTagInput);
         this.updateSmoothie();
+        this.addTagInput = "";
       }
     },
     updateSmoothie() {
