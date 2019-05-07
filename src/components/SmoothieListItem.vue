@@ -1,6 +1,6 @@
 <template>
   <div class="smoothie-list-item">
-    {{name}}
+    <router-link class="event-link" :to="{ name: 'Smoothie', params: {smoothieID: id} }">{{name}}</router-link>
     <button v-on:click="removeSmoothie">Remove</button>
   </div>
 </template>

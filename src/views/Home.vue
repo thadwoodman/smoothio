@@ -29,7 +29,7 @@ import { db } from "@/db";
 import SmoothieListItem from "@/components/SmoothieListItem";
 
 export default {
-  name: "home",
+  name: "Home",
   components: { SmoothieListItem },
   data() {
     return {
