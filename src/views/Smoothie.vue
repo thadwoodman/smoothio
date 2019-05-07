@@ -4,13 +4,21 @@
       <h1 class="smoothie-name">{{smoothie.name}}</h1>
     </header>
     <div class="error-text" v-if="showError">{{errorText}}</div>
+    <div class="smoothie-tags">
+      <ul class="smoothie-tags-list">
+        <SmoothieTag v-for="tag in smoothie.tags" v-bind:key="tag" v-bind:tag="tag"/>
+      </ul>
+      <button v-on:click="showTagInput = !showTagInput">Add tag</button>
+      <form v-if="showTagInput" v-on:submit="addTag">
+        <input type="text" v-model="addTagInput">
+      </form>
+    </div>
     <div class="smoothie-ingredients">
       <SmoothieIngredient
         v-for="ingredient in smoothie.ingredients"
         v-bind:key="ingredient.id"
         v-bind:quantity="ingredient.quantity"
         v-bind:ingredient="ingredient.ingredient"
-        class="content"
       />
     </div>
     <div class="add-smoothie-ingredients">
@@ -43,10 +51,11 @@
 <script>
 import { db } from "@/db";
 import SmoothieIngredient from "@/components/SmoothieIngredient.vue";
+import SmoothieTag from "@/components/SmoothieTag.vue";
 
 export default {
   name: "smoothie",
-  components: { SmoothieIngredient },
+  components: { SmoothieIngredient, SmoothieTag },
   data() {
     return {
       smoothieID: "",
@@ -55,6 +64,8 @@ export default {
       newIngredientInputQuantity: "",
       newIngredientInputIngredient: "",
       showError: false,
+      showTagInput: false,
+      addTagInput: "",
       errorText: ""
     };
   },
@@ -88,6 +99,23 @@ export default {
           quantity: this.newIngredientInputQuantity,
           ingredient: this.newIngredientInputIngredient
         });
+        this.updateSmoothie();
+      }
+    },
+    addTag(event) {
+      event.preventDefault();
+      if (this.addTagInput === "") {
+        this.displayErrorText("Please enter a tag");
+      } else if (
+        this.smoothie.tags &&
+        this.smoothie.tags.include(this.addTagInput)
+      ) {
+        this.displayErrorText("Tag already exists");
+      } else {
+        if (!this.smoothie.tags) {
+          this.smoothie.tags = [];
+        }
+        this.smoothie.tags.push(this.addTagInput);
         this.updateSmoothie();
       }
     },
