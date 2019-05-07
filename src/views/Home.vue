@@ -19,8 +19,6 @@
 <script>
 import { db } from "@/db";
 
-const smoothie = db.collection("smoothies");
-
 export default {
   name: "home",
   data() {
