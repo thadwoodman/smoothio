@@ -13,15 +13,20 @@ import { db } from "@/db";
 const smoothie = db.collection("smoothies");
 
 export default {
-  name: "home",
+  name: "smootihe",
   data() {
     return {
-      smoothies: []
+      smoothie: []
     };
   },
-
-  firestore: {
-    smoothies: db.collection("smoothies")
+  watch: {
+    id: {
+      // call it upon creation too
+      immediate: true,
+      handler(id) {
+        this.$bind("smoothie", users.doc(id));
+      }
+    }
   }
 };
 </script>
