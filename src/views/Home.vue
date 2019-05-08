@@ -3,7 +3,7 @@
     <div class="inline-form-container">
       <div v-if="isAddingSmoothie" class="inline-form">
         <form v-on:submit="onAddSmoothieSubmit">
-          <label>Give your smoothie a name:</label>
+          <label>Name your smoothie (hit enter):</label>
           <input type="text" v-model="newSmoothieName">
           <div v-if="showNameInputError">{{this.nameInputErrorText}}</div>
         </form>
@@ -81,7 +81,6 @@ export default {
 ul.list-of-smoothies {
   list-style: none;
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
   .smoothie-list-item {
     border: 1px solid gray;
@@ -89,7 +88,8 @@ ul.list-of-smoothies {
     width: 140px;
     padding: 35px;
     position: relative;
-    margin-bottom: 25px;
+    margin-bottom: 50px;
+    margin-right: 50px;
   }
 }
 </style>

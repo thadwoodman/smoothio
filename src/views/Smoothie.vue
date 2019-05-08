@@ -10,7 +10,7 @@
       </ul>
       <div class="inline-form-container">
         <form class="inline-form" v-if="showTagInput" v-on:submit="addTag">
-          <label for="tag">Add a tag name</label>
+          <label for="tag">Add a tag name (hit enter):</label>
           <input name="tag" type="text" v-model="addTagInput">
         </form>
         <button v-on:click="showTagInput = !showTagInput">Add tag</button>
@@ -100,7 +100,6 @@ export default {
       ) {
         this.displayErrorText("You must include both quantity and ingredient");
       } else {
-        this.showError = false;
         this.smoothie.ingredients.push({
           quantity: this.newIngredientInputQuantity,
           ingredient: this.newIngredientInputIngredient
@@ -133,6 +132,8 @@ export default {
         .doc(this.smoothieID)
         .set(this.smoothie);
       this.showIngredientsForm = false;
+      this.displayErrorText = "";
+      this.showError = false;
     },
     displayErrorText(text) {
       this.showError = true;
