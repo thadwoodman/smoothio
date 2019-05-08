@@ -1,26 +1,26 @@
 <template>
   <div class="home">
-    <header>
-      <h1>Smoothio</h1>
-    </header>
-    <div class="add-a-smoothie-container">
-      <button v-on:click="isAddingSmoothie = !isAddingSmoothie">Add a smoothie</button>
-      <div v-if="isAddingSmoothie" class="addSmoothieForm">
+    <div class="inline-form-container">
+      <div v-if="isAddingSmoothie" class="inline-form">
         <form v-on:submit="onAddSmoothieSubmit">
-          <label>Smoothie Name</label>
+          <label>Give your smoothie a name:</label>
           <input type="text" v-model="newSmoothieName">
           <div v-if="showNameInputError">{{this.nameInputErrorText}}</div>
         </form>
       </div>
+      <button v-on:click="isAddingSmoothie = !isAddingSmoothie">Add a smoothie</button>
     </div>
-    <div class="list-of-smoothies">
-      <SmoothieListItem
-        v-for="smoothie in smoothies"
-        v-bind:key="smoothie.id"
-        v-bind:id="smoothie.id"
-        v-bind:name="smoothie.name"
-      />
-    </div>
+    <section class="smoothies">
+      <h2>Cool new smoothies:</h2>
+      <ul class="list-of-smoothies">
+        <SmoothieListItem
+          v-for="smoothie in smoothies"
+          v-bind:key="smoothie.id"
+          v-bind:id="smoothie.id"
+          v-bind:name="smoothie.name"
+        />
+      </ul>
+    </section>
   </div>
 </template>
 
@@ -76,3 +76,21 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+ul.list-of-smoothies {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  .smoothie-list-item {
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 140px;
+    padding: 35px;
+    position: relative;
+    margin-bottom: 25px;
+  }
+}
+</style>
+

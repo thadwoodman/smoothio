@@ -8,10 +8,13 @@
       <ul class="smoothie-tags-list">
         <SmoothieTag v-for="tag in smoothie.tags" v-bind:key="tag" v-bind:tag="tag"/>
       </ul>
-      <button v-on:click="showTagInput = !showTagInput">Add tag</button>
-      <form v-if="showTagInput" v-on:submit="addTag">
-        <input type="text" v-model="addTagInput">
-      </form>
+      <div class="inline-form-container">
+        <form class="inline-form" v-if="showTagInput" v-on:submit="addTag">
+          <label for="tag">Add a tag name</label>
+          <input name="tag" type="text" v-model="addTagInput">
+        </form>
+        <button v-on:click="showTagInput = !showTagInput">Add tag</button>
+      </div>
     </div>
     <div class="ingredients-container">
       <h2>Ingredients:</h2>
@@ -27,7 +30,7 @@
     <div class="add-smoothie-ingredients">
       <button v-on:click="showIngredientsForm = true">Add ingredient</button>
       <form v-if="showIngredientsForm" v-on:submit="addIngredient">
-        <div class="input-container">
+        <div class="ingredient-input-container">
           <label for="quantity">Quantity</label>
           <input
             name="quantity"
@@ -36,7 +39,7 @@
             v-model="newIngredientInputQuantity"
           >
         </div>
-        <div class="input-container">
+        <div class="ingredient-input-container">
           <label for="ingredient">Ingredient</label>
           <input
             name="ingredient"
@@ -103,6 +106,8 @@ export default {
           ingredient: this.newIngredientInputIngredient
         });
         this.updateSmoothie();
+        this.newIngredientInputQuantity = "";
+        this.newIngredientInputIngredient = "";
       }
     },
     addTag(event) {
@@ -136,3 +141,27 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+ul.smoothie-tags-list {
+  list-style: none;
+  > li {
+    background: rgba(1, 1, 1, 0.5);
+    color: white;
+    border-radius: 999pc;
+    display: inline-block;
+    margin-right: 25px;
+    padding: 5px 15px;
+  }
+}
+
+.ingredient-input-container {
+  margin-top: 50px;
+  width: 50%;
+  display: inline-block;
+  label {
+    display: block;
+  }
+}
+</style>
+

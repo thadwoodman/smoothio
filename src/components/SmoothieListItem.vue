@@ -1,7 +1,7 @@
 <template>
   <li class="smoothie-list-item">
     <router-link class="event-link" :to="{ name: 'Smoothie', params: {smoothieID: id} }">{{name}}</router-link>
-    <button v-on:click="removeSmoothie">Remove</button>
+    <div class="remove-smoothie" v-on:click="removeSmoothie">remove</div>
   </li>
 </template>
 
@@ -20,3 +20,14 @@ export default {
   }
 };
 </script>
+
+
+<style lang="scss">
+.remove-smoothie {
+  cursor: pointer;
+  color: #ff7373;
+  position: absolute;
+  bottom: 25px;
+  right: 25px;
+}
+</style>
